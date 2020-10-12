@@ -1,23 +1,24 @@
-## Spring Boot test app 
+## Spring Boot Demo app 
 
 ### Containerizing the Application 
 
 We have 2 example Dockerfiles that we used to containerize the application. In both cases we are creating the docker image
-using multi stage docker builds. With multi-stage Docker builds, we use multiple FROM statements for each build stage. 
+using multi stage docker builds. 
+With multi-stage Docker builds, we use multiple FROM statements for each build stage. 
 Every FROM statement creates a new base layer, and discards everything we don’t need from the previous FROM stage and that's why this is the ideal way.
 
-1. Checkout the file ```Dockerfile``` from the root directory of the repo. 
-In this dockerfile we are using open liberty as the base image. 
+1. In the file ```Dockerfile``` from the root directory of the repo we are using open liberty as the base image. 
 
-2. Second one is ```wlp.Dockerfile```. In this one we are using IBM websphere liberty as the base image.
+2. Second one is ```wlp.Dockerfile``` and we are using IBM websphere liberty as the base image.
 
-There are different tags that you can use for the base image. Refer this doc for the different available tags - https://hub.docker.com/_/websphere-liberty
+There are different tags that you can use for the base image. Refer this doc for the different available tags - ```https://hub.docker.com/_/websphere-liberty```
+
 The kernel image we are using contains just the Liberty kernel and no additional runtime features. 
 This image is the recommended basis for custom built images, so that they can contain only the features required for a specific application. 
 For example, the following Dockerfile starts with this image, copies in the server.xml that lists the features required by the application, and then uses the configure.sh script to download those features from the online repository.
 If you want to build the smallest possible WebSphere Liberty application image you can start with the kernel tag, add your artifacts, and run configure.sh to grow the set of features to be fit-for-purpose.
 
-Refer this doc for more information on application image - https://github.com/WASdev/ci.docker#building-an-application-image
+Refer this doc for more information on application image - ```https://github.com/WASdev/ci.docker#building-an-application-image```
 
 ### Running the application locally 
 

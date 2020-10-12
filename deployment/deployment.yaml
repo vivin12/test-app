@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: spring-liberty
+  name: spring-liberty
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-liberty
+  template:
+    metadata:
+      labels:
+        app: spring-liberty
+    spec:
+      containers:
+        - name: spring-liberty
+          image: gooner4life/spring-liberty:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9080

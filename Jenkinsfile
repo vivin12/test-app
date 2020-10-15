@@ -1,30 +1,46 @@
 pipeline {
-  agent {
-    dockerfile true
+  environment {
+    imageName = 'gooner4life/jenkins-test'
+    registryCredentialSet = 'dockerhub'
+    registryUri = ''
+    dockerInstance = ''
   }
-  stages {
 
-    stage('Build') {
+  agent any
+
+  stages {
+     stage('Cloning Git') {
+        steps {
+            git 'https://github.com/YourGithubAccount/YourGithubRepository.git'
+        }
+      }
+
+    stage('Build Image') {
       steps {
         echo 'Building container image..'
         script {
-          dockerInstance = docker.build(imageName)
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
 
       }
     }
 
-    stage('Publish') {
+    stage('Publish Image') {
       steps {
         echo 'Publishing container image to the registry..'
         script {
           docker.withRegistry('', registryCredentialSet) {
-            dockerInstance.push("${env.BUILD_NUMBER}")
-            dockerInstance.push("latest")
+          dockerImage.push()
           }
         }
 
       }
+    }
+
+    stage('Cleaning up') {
+        steps   {
+            sh "docker rmi $registry:$BUILD_NUMBER"
+        }
     }
 
     stage('Deploy') {
@@ -34,10 +50,5 @@ pipeline {
     }
 
   }
-  environment {
-    imageName = 'gooner4life/jenkins-test'
-    registryCredentialSet = 'dockerhub'
-    registryUri = ''
-    dockerInstance = ''
-  }
+
 }

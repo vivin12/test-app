@@ -11,7 +11,7 @@ pipeline {
   stages {
      stage('Cloning Git') {
         steps {
-            git 'https://github.com/YourGithubAccount/YourGithubRepository.git'
+            git 'https://github.com/vivin12/test-app'
         }
       }
 

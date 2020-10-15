@@ -9,11 +9,6 @@ pipeline {
   agent any
 
   stages {
-     stage('Cloning Git') {
-        steps {
-            git 'https://github.com/vivin12/test-app'
-        }
-      }
 
     stage('Build Image') {
       steps {

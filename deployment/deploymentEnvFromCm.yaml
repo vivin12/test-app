@@ -20,14 +20,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 9080
-          env:
-          - name: app.version
-            valueFrom:
-              configMapKeyRef:
-                name: spring-liberty-cm
-                key: app.version
-#          - name: db.password
-#              valueFrom:
-#                secretKeyRef:
-#                  name: db-password-secret
-#                  key: password
+        envFrom:
+          ConfigMapRef
+            name: spring-liberty-cm

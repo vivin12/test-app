@@ -20,14 +20,18 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 9080
-          env:
-          - name: app.version
-            valueFrom:
-              configMapKeyRef:
-                name: spring-liberty-cm
-                key: app.version
-#          - name: db.password
-#              valueFrom:
-#                secretKeyRef:
-#                  name: db-password-secret
-#                  key: password
+          volumeMounts:
+            - name: config-volume
+              mountPath: "/etc/config"
+            - name: db-secret-volume
+              mountPath: "/etc/config"
+              readOnly: true
+      volumes:
+        - name: config-volume
+          configMap:
+            name: spring-liberty-cm
+        - name: db-secret-volume
+          secret:
+            secretName: db-password-secret
+
+

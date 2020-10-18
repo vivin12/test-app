@@ -11,16 +11,16 @@ Every FROM statement creates a new base layer, and discards everything we don’
 
 2. Second one is ```wlp.Dockerfile``` and we are using IBM websphere liberty as the base image.
 
-There are different tags that you can use for the base image. Refer this doc for the different available tags - ```https://hub.docker.com/_/websphere-liberty```
+There are different tags that you can use for the base image. Refer this doc for the different available tags - https://hub.docker.com/_/websphere-liberty
 
 The kernel image we are using contains just the Liberty kernel and no additional runtime features. 
 This image is the recommended basis for custom built images, so that they can contain only the features required for a specific application. 
 For example, the following Dockerfile starts with this image, copies in the server.xml that lists the features required by the application, and then uses the configure.sh script to download those features from the online repository.
 If you want to build the smallest possible WebSphere Liberty application image you can start with the kernel tag, add your artifacts, and run configure.sh to grow the set of features to be fit-for-purpose.
 
-Refer this doc for more information on application image - ```https://github.com/WASdev/ci.docker#building-an-application-image```
+Refer this doc for more information on application image - https://github.com/WASdev/ci.docker#building-an-application-image
 
-### Running the application locally 
+### Running the application locally as a docker conatiner
 
 1. Git clone 
 2. Build and tag the docker image. 
@@ -44,7 +44,20 @@ Refer this doc for more information on application image - ```https://github.com
 
 2. push it docker registry ```docker push <docker repo:tag name>```
 
-### 
+### Deploying the application on an OCP clsuter manually 
+
+1. Login to OCP cluster
+
+2. We have several deployment manifest files in the ```deployment``` folder of the root directory of the project. Inorder to deploy the application on to the cluster we need to apply these yaml files. 
+
+3. First let's take a look at ```configmap.yaml``` and ```secret.yaml```
+   
+4. Apply the yaml files that creates deployment, sevice and route. 
+
+  ```oc apply -f deployment/deployment.yaml
+      oc apply -f deployment/service.yaml
+      oc apply -f deployment/route.yaml
+   ```
 
 ### Reference docs 
 

@@ -26,8 +26,8 @@ spec:
               configMapKeyRef:
                 name: spring-liberty-cm
                 key: app.version
-#          - name: db.password
-#              valueFrom:
-#                secretKeyRef:
-#                  name: db-password-secret
-#                  key: password
+          - name: db.password
+            valueFrom:
+              secretKeyRef:
+                name: db-password-secret
+                key: password

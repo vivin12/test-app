@@ -7,9 +7,9 @@ using multi stage docker builds.
 With multi-stage Docker builds, we use multiple FROM statements for each build stage. 
 Every FROM statement creates a new base layer, and discards everything we don’t need from the previous FROM stage and that's why this is the ideal way.
 
-1. In the file ```Dockerfile``` from the root directory of the repo we are using open liberty as the base image. 
+1. In the file ```olp.Dockerfile``` from the root directory of the repo we are using open liberty as the base image. 
 
-2. Second one is ```wlp.Dockerfile``` and we are using IBM websphere liberty as the base image.
+2. Second one is ```Dockerfile``` and we are using IBM websphere liberty as the base image.
 
 There are different tags that you can use for the base image. Refer this doc for the different available tags - https://hub.docker.com/_/websphere-liberty
 
@@ -25,10 +25,10 @@ Refer this doc for more information on application image - https://github.com/WA
 1. Git clone 
 2. Build and tag the docker image. 
     If you are using ibm-liberty as the base image 
-    ```docker build . -t websphere-liberty -f wlp.Dockerfile```
+    ```docker build . -t websphere-liberty -f Dockerfile```
     
     If you are using open liberty as the base image 
-    ```docker build . -t open-liberty -f Dockerfile```
+    ```docker build . -t open-liberty -f olp.Dockerfile```
 
 3. Run the docker image 
     For running ibm liberty image execute 

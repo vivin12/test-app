@@ -3,6 +3,7 @@ pipeline {
   environment {
     registry = "gooner4life/jenkins-test"
     registryCredential = 'dockerhub'
+    dockerImage = ''
   }
 
   agent any
@@ -16,7 +17,7 @@ pipeline {
     stage('Building image') {
       steps {
         script {
-          docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }

@@ -54,10 +54,14 @@ Refer this doc for more information on application image - https://github.com/WA
    
 4. Apply the yaml files that creates deployment, sevice and route. 
 
-  ```oc apply -f deployment/deployment.yaml
+  ```
+      oc apply -f deployment/deployment.yaml
       oc apply -f deployment/service.yaml
       oc apply -f deployment/route.yaml
    ```
+### Building the image using Jenkins and pushing it to a docker registry(Dockerhub)
+
+For doing this follow the instructions in the Readme of this repo - https://github.com/vivin12/jenkins-example
 
 ### Reference docs 
 

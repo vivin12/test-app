@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: spring-liberty-vs
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - spring-liberty-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: spring-liberty-service
+            subset: v1
+            port:
+              number: 80
+          weight: 100
+#        - destination:
+#            host: spring-liberty-service
+#            subset: v2
+#            port:
+#              number: 80
+#          weight: 20

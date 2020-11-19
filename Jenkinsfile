@@ -1,8 +1,8 @@
 pipeline {
 
   environment {
-    registry = "gooner4life/jenkins-test"
-    registryCredential = 'dockerhub'
+    registry = "gooner4life/jenkins-test"   //replace with OCP image stream name
+    registryCredential = 'dockerhub'       //replace with OCP credential you have added in jenkins
     dockerImage = ''
   }
 
@@ -25,7 +25,7 @@ pipeline {
     stage('Deploy Image') {
       steps {
         script {
-          docker.withRegistry( '', registryCredential ) {
+          docker.withRegistry( '', registryCredential ) {   //update the first field with registry url if you are not pushing to dockerhub
             dockerImage.push()
           }
         }
@@ -33,7 +33,7 @@ pipeline {
     }
 
     stage('Remove Unused docker image') {
-      steps{
+      steps {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }

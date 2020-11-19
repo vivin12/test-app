@@ -16,7 +16,7 @@ spec:
         from:
           kind: ImageStreamTag
           namespace: demo
-          name: 'test:latest'
+          name: 'spring-app:latest'
   replicas: 1
   template:
     metadata:

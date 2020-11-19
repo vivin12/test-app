@@ -4,6 +4,7 @@ metadata:
   labels:
     app: spring-app
   name: spring-app-service
+  namespace: demo
 spec:
   type: NodePort
   ports:
